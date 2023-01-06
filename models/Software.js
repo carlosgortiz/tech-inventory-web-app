@@ -30,10 +30,11 @@ Software.init(
         },
         provider_id: {
             type: DataTypes.INTEGER,
-            references: {
+            allowNull:true,
+/*             references: {
                 model: 'provider',
                 key: 'id',
-            },
+            }, */
         },
     },
     {

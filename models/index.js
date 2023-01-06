@@ -1,7 +1,7 @@
 const User = require('./User');
+const Provider = require('./Provider');
 const Hardware = require('./Hardware');
 const Software = require('./Software');
-const Provider = require('./Provider');
 const DevicePackage = require('./DevicePackage');
 
 Hardware.belongsTo(Provider, {
@@ -10,11 +10,7 @@ Hardware.belongsTo(Provider, {
 
 Software.belongsTo(Provider, {
     foreignKey: 'provider_id',
-});
-
-Hardware.hasMany(Software, {
-    foreignKey: 'software_id',
-});
+}); 
 
 Software.belongsToMany(Hardware, {
     through: DevicePackage
@@ -22,14 +18,15 @@ Software.belongsToMany(Hardware, {
 
 Hardware.belongsToMany(Software, {
     through: DevicePackage
-});
+}); 
+
 
 
 module.exports = {
     User,
+    Provider,
     Hardware,
     Software,
-    Provider,
     DevicePackage,
 };
 

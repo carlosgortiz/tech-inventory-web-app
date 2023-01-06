@@ -53,13 +53,13 @@ Hardware.init(
                 key: 'id',
             },
         },
-        software_id: {
+        /*software_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'software',
                 key: 'id',
             },
-        },
+        },*/
     },
     {
         sequelize,

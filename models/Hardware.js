@@ -16,11 +16,6 @@ Hardware.init(
             allowNull: false,
             len: [80],
         },
-        type: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            len: [8],
-        },
         purchase_date: {
             type: DataTypes.DATE,
             validate: {
@@ -48,10 +43,11 @@ Hardware.init(
         },
         provider_id: {
             type: DataTypes.INTEGER,
-            references: {
+            allowNull:true,
+/*             references: {
                 model: 'provider',
                 key: 'id',
-            },
+            }, */
         },
     },
     {

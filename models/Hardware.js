@@ -44,10 +44,10 @@ Hardware.init(
         provider_id: {
             type: DataTypes.INTEGER,
             allowNull:true,
-/*             references: {
+             references: {
                 model: 'provider',
                 key: 'id',
-            }, */
+            }, 
         },
     },
     {

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', async (request, response) => {    
-    const loggedIn = true;  //true para cuando esta logeado para controlar el menu falso para cuando no 
+    const loggedIn = false;  //true para cuando esta logeado para controlar el menu falso para cuando no 
 
     //response.send('GET Home route TEST')
     /*Estructura de los mensajes */

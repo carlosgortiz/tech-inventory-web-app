@@ -1,0 +1,48 @@
+
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">        
+        {{#if typeLogin}}  <!--Para identificar el tipo de Vista Login/SingUP-->
+            Iniciar sesión:
+        {{else}}    
+            Registrarse
+        {{/if}}
+    </div>
+      <div class="card-body">
+        <form 
+            {{#if typeLogin}}
+                action="/api/users/login" 
+            {{else}}
+                action="/api/users/singup" 
+            {{/if}}              
+        method="POST">
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Usuario</label>
+            <input type="email" class="form-control" name = "inputUser" placeholder="Capture su usuario: name@example.com">
+            </div>
+
+            <div class="mb-3">
+            <label for="inputPassword" class="form-label">Password</label>
+                <input type="password" class="form-control" name="inputPassword">
+            </div>
+
+            <div class="mt-4">
+            <button class="form-control btn btn-primary" >
+                {{#if typeLogin}}
+                    Ingresar
+                {{else}} 
+                    Registrarse
+                {{/if}}                
+                </button>
+            </div>
+        </form>
+      </div> 
+    <div class="card-footer">
+        {{#if typeLogin}}
+            <a href="/api/users/singup" class="link-primary">Registrarse</a>
+        {{else}}    
+            <a href="/api/users/login" class="link-primary">Ingresar</a>
+        {{/if}}
+    </div>
+  </div>
+</div>

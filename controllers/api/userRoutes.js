@@ -3,12 +3,13 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.get('/login', async (request, response) => {    
-    response.send('GET user login render Login page')
+    //response.send('GET user login render Login page')
+    response.render('login', {typeLogin:true});
 })
 
 
 router.post('/login', async (request, response) => {    
-    response.send('POST Crear user y hacer login')
+    response.send(`POST hacer login usr/psw ${request.body.inputUser} - ${request.body.inputPassword} `);
 })
 
 router.get('/singup', async (request, response) => {

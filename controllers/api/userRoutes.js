@@ -31,8 +31,16 @@ router.post('/login', async (request, response) => {
           }
         else{
             //crear session y redirigir al home
-            console.log('usuario logeado', request.body.inputUser);
-            response.redirect('/');
+            request.session.save(() => {
+                request.session.loggedIn = true;
+                request.session.username = userDb.email;
+                request.session.userid = userDb.id;
+                console.log('almacenado variables de session', request.session.cookie);
+                response.redirect('/');    
+            });
+            
+/*             console.log('usuario logeado', request.body.inputUser);
+            response.redirect('/'); */
         }
     }    
     catch ( error ) {

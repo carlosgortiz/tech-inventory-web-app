@@ -99,7 +99,14 @@ router.post('/singup', async (request, response) => {
 })
 
 router.get('/logout', async (request, response) => {
-    response.send('GET user/logout cerrar session del  usuario.')
+    //response.send('GET user/logout cerrar session del  usuario.')
+    if (request.session.loggedIn) {
+        request.session.destroy(() => {
+          response.redirect('/');
+        });
+      } else {
+        response.redirect('/');
+      }    
 })
 
 

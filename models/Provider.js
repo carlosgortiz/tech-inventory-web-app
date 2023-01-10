@@ -24,15 +24,14 @@ Provider.init(
             },
         },
         tel: {
-            type: DataTypes.INTEGER,
-            validate: {
-                isNumeric: true,
-            },
+            type: DataTypes.STRING,
+            allowNull:true
         },
 
     },
     {
         sequelize,
+        timestamps : false,
         freezeTableName: true,
         underscored: false,
         modelName: 'provider',

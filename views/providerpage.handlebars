@@ -1,0 +1,44 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">        
+        {{#if newProvider}}
+            Create New Provider
+        {{else}}    
+            Edit Provider
+        {{/if}}
+    </div>
+      <div class="card-body">
+        <form id="formPost"
+            {{#if newProvider}}
+                action="/api/providers" 
+                method="POST"
+                data-id = "0"
+            {{else}}
+                data-id = "{{id}}"
+            {{/if}}              
+        >
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Name :</label>
+            <input class="form-control" id="textName" name = "inputName" placeholder="Capture el nombre" value = "{{name}}"/>
+            </div>
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">E-mail :</label>
+            <input type="email" class="form-control" id="textEmail" name = "inputEmail" placeholder="Capture el email" value = "{{email}}"/>
+            </div>
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Tel :</label>
+            <input class="form-control" id="textTel" name = "inputTel" placeholder="Capture el telefono" value = "{{tel}}"/>
+            </div>
+            <div class="mt-4">
+                {{#if newProvider}}
+                    <button class="form-control btn btn-primary" >Create</button>
+                {{else}} 
+                    <button id="updateBtn" class="form-control btn btn-primary" >Update</button>
+                    <button id="deleteBtn" class="form-control btn btn-danger" >Delete</button>
+                {{/if}}                
+            </div>
+        </form>
+      </div> 
+  </div>
+</div>
+{{!-- <script src="/js/provider.js"></script> Verificar si usamos JS o override --}} 

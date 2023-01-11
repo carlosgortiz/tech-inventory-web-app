@@ -63,30 +63,37 @@ router.post('/', appAuth,  async (request, response) => {
 });
 
 // Updates Hardware based on its id
-router.put('/:id', (req, res) => {
-    Hardware.update(
-      {
-        name: req.body.name,
-        type: req.body.type,
-        purchase_date: req.body.purchase_date,
-        warranty: req.body.warranty,
-        brand: req.body.brand,
-        address: req.body.address,
-        department: req.body.department,
-        provider_id: req.body.provider_id
+router.put('/:id', appAuth, async (request, response) => {       
+  try {
+      const rowHardware = await Hardware.update({
+        name: request.body.name,
+        purchase_date: request.body.purchase_date,
+        warranty: request.body.warranty,
+        brand: request.body.brand,
+        address: request.body.address,
+        department: request.body.department,
+        provider_id: request.body.provider_id
       },
-       {
-         where: {
-           id: req.params.id,
-         },
-       }
-    )
-      .then((updatedHardware) => {
-        // Sends the updated hardware as a json response
-        res.json(updatedHardware);
-      })
-      .catch((err) => res.json(err));
-  });
+      {
+          where : {
+              id : request.params.id
+          }
+      }
+      );
+
+      if (!rowHardware){
+          response.status(404).json({code : 404, message : 'No se encontro registro.', data : []});            
+      }
+      else{
+          response.status(200).json({code : 200, message : 'Registro actualizado.', data : [rowHardware]});            
+      }        
+
+  }
+  catch ( error ){
+      response.status(500).json(error);
+  }
+  return;
+});
 
 // Delete route for a hardware with a matching id
 router.delete('/:id', (req, res) => {

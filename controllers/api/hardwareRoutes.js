@@ -1,28 +1,47 @@
 const router = require('express').Router();
-const Hardware = require('../../models/Hardware');
+const { Hardware } = require('../../models');
+const appAuth = require('../../utils/appAuth');
 
-// GET all Hardwares
-router.get('/', (req, res) => {
-    // Get all hardwares from the Hardware table
-    Hardware.findAll().then((HardwareData) => {
-      res.json(HardwareData);
-    });
-  });
+//Render del formulario 
+router.get('/new', appAuth, async (request, response) => {    
+  const loggedIn = !!request.session.loggedIn;
+  response.render('hardwarepage',{loggedIn, newHardware:true});
+  return;
+});
   
-  // GET a Hardware
-  router.get('/:id', (req, res) => {
-    // Get one Hardware from the Hardware table
-    Hardware.findOne(
-      {
-        // Gets the Hardware based on the id given in the request parameters
-        where: { 
-          id: req.params.id 
-        },
-      }
-    ).then((HardwareData) => {
-      res.json(HardwareData);
-    });
+router.get('/list', appAuth, async (request, response) => {       
+  const listHardware = await Hardware.findAll({
+      attributes : ['id','name', 'purchase_date','warranty', 'brand', 'address', 'department', 'provider_id'],
+      order : [['name', 'DESC']]
   });
+
+  const hardwareRows = listHardware.map(rows => rows.get ({plain:true}));
+  const loggedIn = !!request.session.loggedIn ;
+  response.render('hardware',{loggedIn, hardwareRows})
+  return;
+});
+
+router.get('/:id', appAuth, async (request, response) => {       
+  try {
+      const rowHardware = await Hardware.findOne({
+          where : {
+              id : request.params.id
+          }
+      },
+      );
+
+      if (!!rowHardware){
+          const loggedIn = !!request.session.loggedIn ;
+          response.render('hardwarepage', {loggedIn: loggedIn, newHardware:false, id: rowHardware.id, name: rowHardware.name, 
+          purchase_date : rowHardware.purchase_date, warranty : rowHardware.warranty, brand : rowHardware.brand, address : rowHardware.address,
+          department : rowHardware.department, provider_id : rowHardware.provider_id});        
+      }
+  }
+  catch ( error ){
+      response.status(500).json(error);
+  }
+  return;
+});
 
 // CREATE a hardware
 router.post('/', (req, res) => {

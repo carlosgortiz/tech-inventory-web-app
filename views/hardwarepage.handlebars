@@ -1,0 +1,61 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-header">        
+        {{#if newHardware}}
+            Create New Hardware
+        {{else}}    
+            Edit Hardware
+        {{/if}}
+    </div>
+      <div class="card-body">
+        <form id="formHardware"
+            {{#if newHardware}}
+                action="/api/hardwares" 
+                method="POST"
+                data-id = "0"
+            {{else}}
+                data-id = "{{id}}"
+            {{/if}}              
+        >
+             <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Name :</label>
+            <input class="form-control" id="textName" name = "inputName" placeholder="Capture el tipo de computadora" value = "{{name}}"/>
+            </div>
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Purchase date :</label>
+            {{!-- <input class="form-control" id="textName" name = "inputName" placeholder="Capture el nombre" value = "{{name}}"/> --}}
+            <input class="form-control" id="purchase_date" name = "inputDate" placeholder="Capture la fecha de adquisicion" value = "{{purchase_date}}"/>
+            </div>
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Warranty :</label>
+            <input type="number" class="form-control" id="textWarranty" name = "inputWarranty" placeholder="Capture los meses de garantia" value = "{{warranty}}"/>
+            </div>
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Brand :</label>
+            <input class="form-control" id="textBrand" name = "inputBrand" placeholder="Capture la marca de la computadora" value = "{{brand}}"/>
+            </div>
+             <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Address :</label>
+            <input class="form-control" id="textAddress" name = "inputAddress" placeholder="Capture la ubicacion de la computadora" value = "{{address}}"/>
+            </div>
+             <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Department :</label>
+            <input class="form-control" id="textDepartment" name = "inputDepartment" placeholder="Capture el departamento asignado" value = "{{department}}"/>
+            </div>
+             <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Povider :</label>
+            <input class="form-control" id="textProvider" name = "inputProvider" placeholder="Capture el proveedor de la computadora" value = "{{provider_id}}"/>
+            </div>
+            <div class="mt-4">
+                {{#if newHardware}}
+                    <button class="form-control btn btn-primary" >Create</button>
+                {{else}} 
+                    <button id="updateBtn" class="form-control btn btn-primary" >Update</button>
+                    <button id="deleteBtn" class="form-control btn btn-danger" >Delete</button>
+                {{/if}}                
+            </div>
+        </form>
+      </div> 
+  </div>
+</div>
+<script src="/js/Hardware.js"></script> 

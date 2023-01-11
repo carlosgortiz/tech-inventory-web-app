@@ -1,0 +1,46 @@
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header">
+            {{#if newSoftware}}
+            Create New Software
+            {{else}}
+            Edit Software
+            {{/if}}
+        </div>
+        <div class="card-body">
+            <form id="formSoftware" {{#if newSoftware}} action="/api/softwares" method="POST" data-id="0" {{else}}
+                data-id="{{id}}" {{/if}}>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Name :</label>
+                    <input class="form-control" id="textName" name="inputName" placeholder="Capture el nombre"
+                        value="{{name}}" />
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Purchase Date :</label>
+                    <input type="date" class="form-control" id="textPurchaseDate" name="inputPurchase_date"
+                        placeholder="Capture la fecha de compra" value="{{purchase_date}}" />
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Warranty :</label>
+                    <input class="form-control" id="textWarranty" name="inputWarranty"
+                        placeholder="Capture los meses de garantia" value="{{warranty}}" />
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Provider :</label>
+                    <input class="form-control" id="textProvider" name="inputProvider" placeholder="Elija el proveedor"
+                        value="{{provider_id}}" />
+                </div>
+
+                <div class="mt-4">
+                    {{#if newSoftware}}
+                    <button class="form-control btn btn-primary">Create</button>
+                    {{else}}
+                    <button id="updateBtn" class="form-control btn btn-primary">Update</button>
+                    <button id="deleteBtn" class="form-control btn btn-danger">Delete</button>
+                    {{/if}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/js/Software.js"></script>

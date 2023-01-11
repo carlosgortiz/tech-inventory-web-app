@@ -43,25 +43,23 @@ router.get('/:id', appAuth, async (request, response) => {
   return;
 });
 
-// CREATE a hardware
-router.post('/', (req, res) => {
-
-  Hardware.create({
-    name: req.body.name,
-    type: req.body.type,
-    purchase_date: req.body.purchase_date,
-    warranty: req.body.warranty,
-    brand: req.body.brand,
-    address: req.body.address,
-    department: req.body.department,
-    provider_id: req.body.provider_id
-  })
-    .then((newHardware) => {
-      res.json(newHardware);
-    })
-    .catch((err) => {
-      res.json(err);
-    });
+//Registro del nuevo hardware
+router.post('/', appAuth,  async (request, response) => {       
+  try {
+      const newHardware = await Hardware.create({
+        name: request.body.inputName,
+        purchase_date: request.body.inputDate,
+        warranty: request.body.inputWarranty,
+        brand: request.body.inputBrand,
+        address: request.body.inputAddress,
+        department: request.body.inputDepartment,
+        provider_id: request.body.inputProvider
+      });
+      response.redirect('/api/hardwares/list')
+  }
+  catch ( error ){
+      response.status(500).json(error);
+  }
 });
 
 // Updates Hardware based on its id

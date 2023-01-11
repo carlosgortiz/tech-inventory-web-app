@@ -96,16 +96,25 @@ router.put('/:id', appAuth, async (request, response) => {
 });
 
 // Delete route for a hardware with a matching id
-router.delete('/:id', (req, res) => {
-    Hardware.destroy({
-      where: {
-        id: req.params.id,
-      },
-    })
-      .then((deletedHardware) => {
-        res.json(deletedHardware);
+router.delete('/:id', appAuth,  async (request, response) => {    
+  try {
+      const rowHardware = await Hardware.destroy({
+          where : {
+              id : request.params.id
+          }
       })
-      .catch((err) => res.json(err));
-  });
+
+      if (!rowHardware){
+          response.status(404).json({code : 404, message : 'No se encontro registro.', data : []});            
+      }
+      else{
+          response.status(200).json({code : 200, message : 'Registro eliminado.', data : [rowHardware]});            
+      }        
+  }
+  catch ( error ){
+      response.status(500).json(error);
+  }
+  return;
+});
 
 module.exports = router;

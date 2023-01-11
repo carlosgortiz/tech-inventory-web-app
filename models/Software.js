@@ -39,6 +39,7 @@ Software.init(
     },
     {
         sequelize,
+        timestamps: false,
         freezeTableName: true,
         underscored: false,
         modelName: 'software',

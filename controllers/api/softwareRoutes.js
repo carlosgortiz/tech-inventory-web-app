@@ -12,9 +12,8 @@ router.get('/new', appAuth, async (request, response) => {
 // GET all Softwares
 router.get('/list', appAuth, async (req, res) => {
     const listSoftwares = await Software.findAll({
-        attributes: ['id', 'name', 'purchase_date', 'warranty'],
-        include: [Provider],
-        order: [['id', 'DESC']]
+        attributes: ['id', 'name', 'purchase_date', 'warranty','provider_id'],
+        order: [['name', 'DESC']]
     });
     const softwaresData = listSoftwares.map(software => software.get({ plain: true }));
     const loggedIn = !!req.session.loggedIn;
@@ -28,17 +27,14 @@ router.get('/:id', appAuth, async (req, res) => {
         const softwareData = await Software.findByPk(req.params.id, {
             where: {
                 id: req.params.id
-            },
-            include: [Provider],
+            }
         });
-        if (!softwareData) {
-            res.status(404).json({ message: 'No existe software con ese id!' });
-            return;
+        if (!!softwareData) {
+            const loggedIn = !!req.session.loggedIn;
+            const software = softwareData.get({ plain: true });
+            res.render('softwarepage', { loggedIn: loggedIn, newSoftware: false, id: software.id, name: software.name, purchase_date: software.purchase_date, warranty: software.warranty, provider_id: software.provider_id });
         }
-        const loggedIn = !!req.session.loggedIn;
-        const software = softwareData.get({ plain: true });
-        res.render('softwarepage', { loggedIn: loggedIn, newSoftware: false, id: software.id, name: software.name, purchase_date: software.purchase_date, warranty: software.warranty, provider: software.provider.name });
-    }
+    }    
     catch (error) {
         res.status(500).json(error);
     };

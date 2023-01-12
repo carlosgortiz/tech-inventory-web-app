@@ -17,7 +17,7 @@
 ![Visualización de la aplicación](./assets/images/tech_inventory_app.png)
 
 ## Animación de la aplicación
-![Animación de la aplicación](./assets/images/tech_inventory_app.png)
+![Animación de la aplicación](./assets/images/tech%20-%20inventory.gif)
 
 ## Tecnologías utilizadas
 
@@ -44,5 +44,5 @@
 
 - [Doris Recio](https://github.com/dorecio)
 - [Carlos Ortiz](https://github.com/carlosgortiz)
-- [Davi Morales](https://github.com/Davidmome)
+- [David Morales](https://github.com/Davidmome)
 - [Julio César Del Ángel](https://github.com/JulioCesarDelAngel)

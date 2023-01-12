@@ -4,14 +4,14 @@ const appAuth = require('../../utils/appAuth');
 
 
 //Render del formulario 
-router.get('/new', appAuth,  async (request, response) => {    
+router.get('/new',  async (request, response) => {    
     const loggedIn = !!request.session.loggedIn ;
     response.render('providerpage',{loggedIn, newProvider:true});
     return;
 })
 
 
-router.get('/list', appAuth, async (request, response) => {    
+router.get('/list',  async (request, response) => {    
     //response.send('GET provider ')    
     const listProvider = await Provider.findAll({
         attributes : ['id','name', 'email','tel'],
@@ -28,7 +28,7 @@ router.get('/list', appAuth, async (request, response) => {
 })
 
 
-router.get('/:id', appAuth, async (request, response) => {    
+router.get('/:id', async (request, response) => {    
     //response.send('PUT provider ')    
     try {
         const rowProvider = await Provider.findOne({
@@ -50,7 +50,7 @@ router.get('/:id', appAuth, async (request, response) => {
 })
 
 //Registro del nuevo provider
-router.post('/', appAuth, async (request, response) => {    
+router.post('/',  async (request, response) => {    
     //response.send('POST provider ')    
     try {
         const newProvider = await Provider.create({
@@ -67,7 +67,7 @@ router.post('/', appAuth, async (request, response) => {
 
 })
 
-router.delete('/:id', appAuth, async (request, response) => {    
+router.delete('/:id',  async (request, response) => {    
     //response.send('DELETE provider ')    
     /*Ded
      */
@@ -93,7 +93,7 @@ router.delete('/:id', appAuth, async (request, response) => {
 })
 
 
-router.put('/:id', appAuth, async (request, response) => {    
+router.put('/:id', async (request, response) => {    
     //response.send('PUT provider ')    
     try {
         const rowProvider = await Provider.update({

@@ -11,7 +11,7 @@
 
 
 ## Aplicación desplegada en Heroku
-* https://la_gran_aplicacion.herokuapp.com/
+* https://techinven.herokuapp.com/
 
 ## Captura de pantalla de la aplicación
 ![Visualización de la aplicación](./assets/images/tech_inventory_app.png)
